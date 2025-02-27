@@ -12,6 +12,50 @@ I've broke the development into phases which will be listed below.
     - Phase 2 -> in development
     - Phase 3
 
+## Setting up
+
+Firstly clone the repo and go inside de folder using the commands below:
+
+```
+git clone https://github.com/settle-real-state-mngmt/task-system.git
+cd task-system
+```
+
+> The commands below assume you are in the folder of the cloned repo.
+
+If you have composer, php, docker and docker-compose installed:
+
+```
+composer install
+./vendor/bin/sail up
+```
+
+OR
+
+```
+docker-compose up -d
+```
+
+If you don't have compose and php installed but you have docker and docker-compose:
+
+```
+./composerinstall.sh
+```
+
+The command above runs a docker command using *laravelsail/php84-composer* image to run composer install in a container.
+
+After that, you can just 
+
+```
+./vendor/bin/sail up -d
+```
+
+OR
+
+```
+docker-compose up -d
+```
+
 ## Phases
 
 ### Phase 1
@@ -65,6 +109,7 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 27/02/2025
 
+- [x] Add docker-compose to use sail
 - [ ] Add an endpoint so users can register
     - [ ] Add JWT Auth provided by PHP Open Saviour
     - [ ] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
@@ -76,6 +121,8 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [ ] Migration
     - [ ] Controller
     - [ ] Model
+
+### 
 
 ---
 
