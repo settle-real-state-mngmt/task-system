@@ -44,8 +44,6 @@ If you don't have compose and php installed but you have docker and docker-compo
 
 The command above runs a docker command using *laravelsail/php84-composer* image to run composer install in a container.
 
-After that, you can just 
-
 ```
 ./vendor/bin/sail up -d
 ```
@@ -54,6 +52,12 @@ OR
 
 ```
 docker-compose up -d
+```
+
+After having all installed you can run the following:
+
+```
+./vendor/bin/sail artisan migrate
 ```
 
 ## Phases
