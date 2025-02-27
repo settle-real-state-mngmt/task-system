@@ -61,6 +61,8 @@ After having all installed you can run the following:
 ./vendor/bin/sail artisan key:generate
 ```
 
+Done your are all set!
+
 ## Phases
 
 ### Phase 1
@@ -94,7 +96,7 @@ The phases are not meant to be static “written in stone” kind of thing, they
 - [x] Add new organization called SETTLE
 - [x] Add new repository called building-managent
 - [x] Add laravel boilerplate
-- [ ] Add docker-compose to use sail
+- [x] Add docker-compose to use sail
 - [ ] Add endpoint for user sign up
 - [ ] Add endpoint for creating a new building
 - [ ] The user who creates a building is the builder owner
@@ -115,9 +117,15 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 27/02/2025
 
 - [x] Add docker-compose to use sail
-- [ ] Add an endpoint so users can register
-    - [ ] Add JWT Auth provided by PHP Open Saviour
-    - [ ] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
+- [x] Add an endpoint so users can register
+    - [x] Add JWT Auth provided by PHP Open Saviour
+    - [x] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
+    - [ ] Integration tests
+        - [ ] POST /register
+        - [ ] POST /login
+        - [ ] POST /logout
+        - [ ] POST /me
+        - [ ] POST /refresh
 - [ ] Add an endpoint so user can create a building
     - [ ] Migration
     - [ ] Controller
