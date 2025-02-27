@@ -34,7 +34,7 @@ Also you can filter the task by date range, task status or even user assignment.
 
 #### Breaking to tasks
 
-In this phase my goal is to merge my story telling with the project description to them be able to create a more refined list of tasks. This is done in colors so I can see what is done and from where they come from.
+In this phase my goal is to merge my story telling with the project description to them be able to create a more refined list of tasks.
 
 By having this done I can organize better more phases of the project as necessary.
 
@@ -45,8 +45,7 @@ The phases are not meant to be static “written in stone” kind of thing, they
 - [x] Add new organization called SETTLE
 - [x] Add new repository called building-managent
 - [x] Add laravel boilerplate
-- [ ] Add JWT Auth provided by PHP Open Saviour
-- [ ] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
+- [ ] Add docker-compose to use sail
 - [ ] Add endpoint for user sign up
 - [ ] Add endpoint for creating a new building
 - [ ] The user who creates a building is the builder owner
@@ -57,6 +56,26 @@ The phases are not meant to be static “written in stone” kind of thing, they
     - [ ] date range
     - [ ] status
     - [ ] staff assignment
+
+### Phase 3
+
+#### Breaking the broken Tasks
+
+Now that the tasks are broken I have a pretty good idea about what is going to be developed. It is time to add grab each task and describe what needs to be done so development can start.
+
+27/02/2025
+
+- [ ] Add an endpoint so users can register
+    - [ ] Add JWT Auth provided by PHP Open Saviour
+    - [ ] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
+- [ ] Add an endpoint so user can create a building
+    - [ ] Migration
+    - [ ] Controller
+    - [ ] Model
+- [ ] Add an endpoint to create a staff
+    - [ ] Migration
+    - [ ] Controller
+    - [ ] Model
 
 ---
 
