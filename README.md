@@ -9,8 +9,8 @@ I've broke the development into phases which will be listed below.
 - Setting up
 - Phases
     - Phase 1
-    - Phase 2 -> in development
-    - Phase 3
+    - Phase 2 
+    - Phase 3 -> in development
 
 ## Setting up
 
@@ -58,6 +58,7 @@ After having all installed you can run the following:
 
 ```
 ./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan key:generate
 ```
 
 ## Phases
