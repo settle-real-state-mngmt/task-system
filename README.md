@@ -122,8 +122,9 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [x] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
 
 28/02/2025
+
 - [] Use Response macro to create responses for each http status(?)
-- [] Use sqlite for tests
+- [x] Use sqlite for tests
 
 - [] Integration tests
     - [x] POST /register
@@ -137,10 +138,18 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [x] Migration
     - [x] Controller
     - [x] Model
+    - [] Add form request for POST buildings
+    - [] Add PHPDocBlocks
+    - [] Add relationship to Model
 - [ ] Add an endpoint to create a staff
-    - [ ] Migration
-    - [ ] Controller
-    - [ ] Model
+    - [x] Integration tests
+        - [x] POST /staff
+    - [x] Migration
+    - [x] Controller
+    - [x] Model
+    - [x] Add form request for POST buildings
+    - [x] Add PHPDocBlocks
+    - [] Change route from /staffs to /users/staff
 
 
 ### 
