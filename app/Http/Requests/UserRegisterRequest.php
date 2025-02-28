@@ -4,6 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Handles validation for POST /register.
+ *
+ * @author Bruno Braga <brunobraga.work@gmail.com>
+ * @see FormRequest
+ */
+
 class UserRegisterRequest extends FormRequest
 {
     /**
@@ -22,9 +29,9 @@ class UserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:30',
-            'email' => 'email',
-            'password' => 'string|min:8'
+            'name' => 'required|string|max:30',
+            'email' => 'required|unique:users',
+            'password' => 'required|string|min:8'
         ];
     }
 }
