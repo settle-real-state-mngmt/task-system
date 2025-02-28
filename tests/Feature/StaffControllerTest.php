@@ -38,7 +38,7 @@ beforeEach(function () {
  */
 test('test if POST to /api/staff returns 201', function () {
     $response = $this->post(
-        '/api/staffs',
+        '/api/users/staff',
         $this->fakeStaff,
         [
             'accept' => 'application/json',
@@ -55,7 +55,7 @@ test('test if POST to /api/staff returns 201', function () {
 test('if /register returns 422 when passing more than 30 char to name', function () {
     $this->fakeStaff['name'] = 'thisisanamethatdefinitelyhasmorethan30chars';
 
-    $response = $this->post('/api/staffs', $this->fakeStaff, ['accept' => 'application/json']);
+    $response = $this->post('/api/users/staff', $this->fakeStaff, ['accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
 
@@ -65,6 +65,6 @@ test('if /register returns 422 when passing more than 30 char to name', function
 test('if /register returns 422 when passing less than 8 char to password', function () {
     $this->fakeStaff['password'] = '1';
 
-    $response = $this->post('/api/staffs', $this->fakeStaff, ['accept' => 'application/json']);
+    $response = $this->post('/api/users/staff', $this->fakeStaff, ['accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
