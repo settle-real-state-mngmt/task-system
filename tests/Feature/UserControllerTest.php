@@ -12,10 +12,10 @@ $fakeUser = [
 ];
 
 /**
- * Check if /register is sign up users properly
+ * Check if /users is sign up users properly
  */
-test('if /register returns 201 when valid data is sent', function () use ($fakeUser) {
-    $response = $this->post('/api/register', $fakeUser, ['accept' => 'application/json']);
+test('if /users returns 201 when valid data is sent', function () use ($fakeUser) {
+    $response = $this->post('/api/users', $fakeUser, ['accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_CREATED);
     $response->assertJsonStructure([
         'message',
@@ -26,26 +26,26 @@ test('if /register returns 201 when valid data is sent', function () use ($fakeU
 /**
  * Check if api is not allowing users to sign up same email
  */
-test('if /register returns 422 when saving same email twice', function () use ($fakeUser) {
-    $response = $this->post('/api/register', $fakeUser, ['accept' => 'application/json']);
-    $response = $this->post('/api/register', $fakeUser, ['accept' => 'application/json']);
+test('if /users returns 422 when saving same email twice', function () use ($fakeUser) {
+    $response = $this->post('/api/users', $fakeUser, ['accept' => 'application/json']);
+    $response = $this->post('/api/users', $fakeUser, ['accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
 
 /**
  * Check if name has no more than 30 characters
  */
-test('if /register returns 422 when passing more than 30 char to name', function () use ($fakeUser) {
+test('if /users returns 422 when passing more than 30 char to name', function () use ($fakeUser) {
     $fakeUser['name'] = 'thisisanamethatdefinitelyhasmorethan30chars';
-    $response = $this->post('/api/register', $fakeUser, ['accept' => 'application/json']);
+    $response = $this->post('/api/users', $fakeUser, ['accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
 
 /**
  * Check if password has at least 8 characters
  */
-test('if /register returns 422 when passing less than 8 char to password', function () use ($fakeUser) {
+test('if /users returns 422 when passing less than 8 char to password', function () use ($fakeUser) {
     $fakeUser['password'] = '1';
-    $response = $this->post('/api/register', $fakeUser, ['accept' => 'application/json']);
+    $response = $this->post('/api/users', $fakeUser, ['accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });

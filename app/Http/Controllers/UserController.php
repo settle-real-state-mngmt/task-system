@@ -21,13 +21,13 @@ use App\Http\Requests\UserRegisterRequest;
 class UserController extends Controller
 {
     /**
-     * Registers a user by POST /register.
+     * Registers a user by POST /store.
      *
      * @param  UserRegisterRequest $request
      * @throws Exception
      * @return JsonResponse
      */
-    public function register(UserRegisterRequest $request): JsonResponse
+    public function store(UserRegisterRequest $request): JsonResponse
     {
         try {
             $user = User::create($request->all());

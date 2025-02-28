@@ -7,7 +7,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 
-Route::post('/register', [UserController::class, 'register'])->middleware('api');
+Route::post('/users', [UserController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
 
 /**

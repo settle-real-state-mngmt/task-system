@@ -150,6 +150,7 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [x] Add form request for POST buildings
     - [x] Add PHPDocBlocks
     - [] Change route from /staffs to /users/staff
+    - [x] Change route from /register to /users
 
 
 ### 
