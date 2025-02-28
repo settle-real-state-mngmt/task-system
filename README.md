@@ -97,7 +97,7 @@ The phases are not meant to be static “written in stone” kind of thing, they
 - [x] Add new repository called building-managent
 - [x] Add laravel boilerplate
 - [x] Add docker-compose to use sail
-- [ ] Add endpoint for user sign up
+- [x] Add endpoint for user sign up
 - [ ] Add endpoint for creating a new building
 - [ ] The user who creates a building is the builder owner
 - [ ] Add an endpoint to add a new staff
@@ -125,16 +125,18 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [] Use Response macro to create responses for each http status(?)
 - [] Use sqlite for tests
 
-- [x] Integration tests
+- [] Integration tests
     - [x] POST /register
     - [x] POST /login
     - [x] POST /logout
     - [ ] POST /me
     - [ ] POST /refresh
 - [ ] Add an endpoint so user can create a building
-    - [ ] Migration
-    - [ ] Controller
-    - [ ] Model
+    - [x] Integration tests
+        - [] POST /buildings
+    - [x] Migration
+    - [x] Controller
+    - [x] Model
 - [ ] Add an endpoint to create a staff
     - [ ] Migration
     - [ ] Controller
