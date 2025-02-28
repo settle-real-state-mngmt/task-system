@@ -121,7 +121,7 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [x] Add JWT Auth provided by PHP Open Saviour
     - [x] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
     - [ ] Integration tests
-        - [ ] POST /register
+        - [X] POST /register
         - [ ] POST /login
         - [ ] POST /logout
         - [ ] POST /me
