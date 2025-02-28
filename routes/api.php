@@ -18,5 +18,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('auth/logout', [AuthController::class, 'logout']);
 
     Route::post('buildings', [BuildingController::class, 'store']);
-    Route::post('/users/staff', [StaffController::class, 'store']);
+    Route::post('/users/staff', [UserController::class, 'storeStaff']);
 });
