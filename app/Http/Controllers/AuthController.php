@@ -5,18 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Handles incoming requests related to user authentication.
+ *
+ * @author PHP-Open-Source-Saver <https://github.com/PHP-Open-Source-Saver/jwt-auth>
+ * @see Controller
+ */
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        /* $this->middleware('auth:api', ['except' => ['login']]); */
-    }
-
     /**
      * Get a JWT via given credentials.
      *
