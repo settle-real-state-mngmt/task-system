@@ -32,29 +32,14 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        $user = Auth::user();
-        return response()->json($user);
-    }
-
-    /**
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout(): JsonResponse
     {
-        if (Auth::user()) {
-            Auth::logout();
-            return ResponseFacade::json([], Response::HTTP_NO_CONTENT);
-        }
-
-        return ResponseFacade::json([], Response::HTTP_UNAUTHORIZED);
+        Auth::logout();
+        return ResponseFacade::json([], Response::HTTP_NO_CONTENT);
     }
 
     /**

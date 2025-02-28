@@ -120,12 +120,17 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [x] Add an endpoint so users can register
     - [x] Add JWT Auth provided by PHP Open Saviour
     - [x] Setting up according to https://laravel-jwt-auth.readthedocs.io/en/latest/
-    - [ ] Integration tests
-        - [X] POST /register
-        - [ ] POST /login
-        - [ ] POST /logout
-        - [ ] POST /me
-        - [ ] POST /refresh
+
+28/02/2025
+- [] Use Response macro to create responses for each http status(?)
+- [] Use sqlite for tests
+
+- [x] Integration tests
+    - [x] POST /register
+    - [x] POST /login
+    - [x] POST /logout
+    - [ ] POST /me
+    - [ ] POST /refresh
 - [ ] Add an endpoint so user can create a building
     - [ ] Migration
     - [ ] Controller
@@ -134,6 +139,7 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [ ] Migration
     - [ ] Controller
     - [ ] Model
+
 
 ### 
 

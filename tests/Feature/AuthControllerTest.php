@@ -24,7 +24,7 @@ beforeEach(function () use (&$canSeed) {
  * Check if /login returns proper keys and token
  */
 test('if login returns 200 status and a json with access_token, token_type and expires_in', function () use ($credentials) {
-    $response = $this->post('/api/auth/login', $credentials);
+    $response = $this->post('/api/login', $credentials);
     $response->assertStatus(Response::HTTP_OK);
     $response->assertJsonStructure([
         'access_token',
@@ -37,9 +37,14 @@ test('if login returns 200 status and a json with access_token, token_type and e
  * Check if /logout returns proper keys and token
  */
 test('if status is 204 when user logs out', function () use ($credentials) {
-    $this->post('/api/auth/login', $credentials);
+    $loginResponse = $this->post('/api/login', $credentials);
 
-    $response = $this->post('/api/auth/logout', $credentials);
+    $token = $loginResponse->getOriginalContent()['access_token'];
+
+    $response = $this->post('/api/auth/logout', [], [
+        'Accept' => 'application/json',
+        'Authorization' => $token
+    ]);
     $response->assertStatus(Response::HTTP_NO_CONTENT);
 });
 
@@ -47,6 +52,6 @@ test('if status is 204 when user logs out', function () use ($credentials) {
  * Check if /logout returns proper keys and token
  */
 test('if status is 401 when user logs out without being logged in', function () use ($credentials) {
-    $response = $this->post('/api/auth/logout', $credentials);
+    $response = $this->post('/api/auth/logout', $credentials, ['Accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNAUTHORIZED);
 });
