@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRegisterRequest;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{Response as ResponseFacade, Auth, Log};
+use Illuminate\Http\{Response, JsonResponse};
 
 /**
  * Handles incoming requests related to user authentication.
@@ -47,11 +47,14 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
-        Auth::logout();
+        if (Auth::user()) {
+            Auth::logout();
+            return ResponseFacade::json([], Response::HTTP_NO_CONTENT);
+        }
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return ResponseFacade::json([], Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -77,7 +80,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
 }
