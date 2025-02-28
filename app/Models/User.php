@@ -4,10 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+
+use App\Models\Building;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -66,5 +70,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public function buildings(): HasMany
+    {
+        return $this->hasMany(Building::class);
     }
 }

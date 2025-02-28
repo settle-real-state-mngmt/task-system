@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 
 Route::post('/register', [UserController::class, 'register'])->middleware('api');
@@ -17,4 +18,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('auth/logout', [AuthController::class, 'logout']);
 
     Route::post('buildings', [BuildingController::class, 'store']);
+    Route::post('staffs', [StaffController::class, 'store']);
 });
