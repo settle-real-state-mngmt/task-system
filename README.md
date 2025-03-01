@@ -127,30 +127,39 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [x] Use sqlite for tests
 
 - [] Integration tests
-    - [x] POST /register
     - [x] POST /login
     - [x] POST /logout
     - [ ] POST /me
     - [ ] POST /refresh
-- [ ] Add an endpoint so user can create a building
+    - [] Add form request to POST /login
+- [x] Add an endpoint so user can create a building
     - [x] Integration tests
-        - [] POST /buildings
+        - [x] POST /buildings
     - [x] Migration
     - [x] Controller
     - [x] Model
-    - [] Add form request for POST buildings
-    - [] Add PHPDocBlocks
-    - [] Add relationship to Model
-- [ ] Add an endpoint to create a staff
+- [x] Add an endpoint to create a ~staff~teams
     - [x] Integration tests
-        - [x] POST /staff
+        - [x] POST /~staff~teams
     - [x] Migration
     - [x] Controller
     - [x] Model
     - [x] Add form request for POST buildings
     - [x] Add PHPDocBlocks
-    - [x] Change route from /staffs to /users/staff
+    - [x] Change route from /~staffs~teams to /users/~staff~teams
     - [x] Change route from /register to /users
+
+01/03/2025
+
+- [] Change staff to teams to match better the project description
+    - [] Table name
+    - [] Model name
+    - [] Controller name
+- [] Creating a team should be done via POST /teams
+- [] Add endpoint to add a user to a team via POST /teams/users
+- [] Add form request for POST buildings
+- [x] Add PHPDocBlocks relatated to buildings
+- [] Add relationship to Building Model 
 
 
 ### 

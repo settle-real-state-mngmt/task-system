@@ -9,8 +9,21 @@ use Illuminate\Support\Facades\{Response as ResponseFacade, Auth, Log};
 
 use App\Models\Building;
 
+/**
+ * Handles incoming request related to buildings.
+ *
+ * @author Bruno Braga <brunobraga.work@gmail.com>
+ * @see Controller
+ */
 class BuildingController extends Controller
 {
+    /**
+     * Stores a build by POST /buildings
+     *
+     * @param  Request $request
+     * @throws Exception
+     * @return JsonResponse
+     */
     public function store(Request $request): JsonResponse
     {
         try {
@@ -18,6 +31,44 @@ class BuildingController extends Controller
                 'owner_id' => Auth::user()->id,
                 ...$request->all()
             ]);
+
+            return ResponseFacade::json(
+                [
+                    'message' => 'Building created with success!',
+                    'data' => $building
+                ],
+                Response::HTTP_CREATED
+            );
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            return ResponseFacade::json(
+                [
+                    'message' => 'Uh, something went wrong, talk to the API admin in order to sort it out!',
+                    'data' => [],
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    /**
+     * Stores a task by POST /buildings/tasks
+     *
+     * @param  Request $request
+     * @param  string $buildingId
+     * @throws Exception
+     * @return JsonResponse
+     */
+    public function storeTask(Request $request, string $buildingId): JsonResponse
+    {
+        try {
+            $building = Building::where('id', $buildingId)
+                ->where('owner_id', Auth::user()->id)
+                ->first();
+
+            dump('here');
+            dd($building);
 
             return ResponseFacade::json(
                 [
