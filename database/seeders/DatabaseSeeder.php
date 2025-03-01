@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+use App\Models\Building;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Alan Doe',
             'email' => 'alandoe@example.org',
             'password' => 'password',
+        ]);
+
+        Building::factory()->create([
+            'name' => 'Doe Building',
+            'owner_id' => User::first()->id
         ]);
     }
 }
