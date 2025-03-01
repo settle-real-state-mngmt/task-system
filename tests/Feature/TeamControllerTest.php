@@ -3,6 +3,8 @@
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
+use function Pest\Faker\fake;
+use Tests\Fakes;
 
 uses(RefreshDatabase::class);
 
@@ -20,10 +22,15 @@ beforeEach(function () {
         'password' => 'password'
     ];
 
-    $this->fakeStaff = [
+    $this->fakeUser = [
         'name' => 'John Doe',
         'email' => 'johndoe@example.org',
         'password' => 'password'
+    ];
+
+    $this->fakeTeam = [
+        'title' => fake()->title,
+        'owner_id' => Fakes::OWNER_ID
     ];
 
     $this->fakeBuilding = ['name' => 'Plus Ultra building'];
@@ -36,10 +43,10 @@ beforeEach(function () {
 /**
  * Check if /register is sign up users properly
  */
-test('test if POST to /api/staff returns 201', function () {
+test('test if POST to /api/teams returns 201', function () {
     $response = $this->post(
-        '/api/users/staff',
-        $this->fakeStaff,
+        '/api/teams',
+        $this->fakeTeam,
         [
             'accept' => 'application/json',
             'Authorization' => $this->token
@@ -55,16 +62,6 @@ test('test if POST to /api/staff returns 201', function () {
 test('if /register returns 422 when passing more than 30 char to name', function () {
     $this->fakeStaff['name'] = 'thisisanamethatdefinitelyhasmorethan30chars';
 
-    $response = $this->post('/api/users/staff', $this->fakeStaff, ['accept' => 'application/json']);
-    $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-});
-
-/**
- * Check if password has at least 8 characters
- */
-test('if /register returns 422 when passing less than 8 char to password', function () {
-    $this->fakeStaff['password'] = '1';
-
-    $response = $this->post('/api/users/staff', $this->fakeStaff, ['accept' => 'application/json']);
+    $response = $this->post('/api/teams', $this->fakeStaff, ['accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });

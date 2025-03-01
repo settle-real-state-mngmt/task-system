@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuildingController;
-use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 
 Route::post('/users', [UserController::class, 'store']);
@@ -15,8 +15,11 @@ Route::post('/login', [AuthController::class, 'login']);
  * using auth:api middleware
  */
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('auth/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
 
-    Route::post('buildings', [BuildingController::class, 'store']);
-    Route::post('/users/staff', [UserController::class, 'storeStaff']);
+    Route::post('/buildings', [BuildingController::class, 'store']);
+    Route::post('/buildings/{id}/tasks', [BuildingController::class, 'storeTask']);
+
+    Route::post('/teams', [TeamController::class, 'store']);
+    /* Route::post('/users/staff', [UserController::class, 'storeStaff']); */
 });

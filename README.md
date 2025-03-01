@@ -151,15 +151,16 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 01/03/2025
 
-- [] Change staff to teams to match better the project description
-    - [] Table name
-    - [] Model name
-    - [] Controller name
-- [] Creating a team should be done via POST /teams
+- [x] Change staff to teams to match better the project description
+    - [x] Table name
+    - [x] Model name
+    - [x] Controller name
+- [x] Creating a team should be done via POST /teams
 - [] Add endpoint to add a user to a team via POST /teams/users
 - [] Add form request for POST buildings
 - [x] Add PHPDocBlocks relatated to buildings
-- [] Add relationship to Building Model 
+- [x] Add relationship to Building Model 
+- [] *Change RegisterFormRequest name to *StoreRequest
 
 
 ### 
