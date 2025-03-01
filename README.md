@@ -156,12 +156,17 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [x] Model name
     - [x] Controller name
 - [x] Creating a team should be done via POST /teams
-- [] Add endpoint to add a user to a team via POST /teams/users
+- [] Add endpoint to add a user to a team via POST /teams/{id}/users
 - [] Add form request for POST buildings
 - [x] Add PHPDocBlocks relatated to buildings
 - [x] Add relationship to Building Model 
 - [] *Change RegisterFormRequest name to *StoreRequest
-
+- [x] Add fake data to Fakes class
+- [] Clean tests to use Fakes class
+- [] Add policy to check if logged user is owner of the team when adding a user to it
+- [] Add specific log channels for each entity
+- [] Refactor tests description
+- [] Check json contains proper error message on 422 tests
 
 ### 
 

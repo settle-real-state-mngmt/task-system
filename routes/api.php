@@ -21,5 +21,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/buildings/{id}/tasks', [BuildingController::class, 'storeTask']);
 
     Route::post('/teams', [TeamController::class, 'store']);
+    Route::post('/teams/{team}/users', [TeamController::class, 'attachUserToTeam']);
     /* Route::post('/users/staff', [UserController::class, 'storeStaff']); */
 });
