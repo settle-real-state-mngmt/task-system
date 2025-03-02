@@ -169,6 +169,12 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [x] Add fake data to Fakes class
 - [x] Add policy to check if logged user is owner of the team when adding a user to it
 
+02/03/2025
+
+- [] Add policy to store task building
+- [] add integration tests for 422 on buildings
+- [] add comments
+
 ### 
 
 ---
