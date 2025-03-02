@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->foreignId('building_id')->constrained();
-            $table->foreignId('staff_id');
+            $table->foreignId('user_id')->constained();
             $table->timestamps();
         });
     }

@@ -2,13 +2,22 @@
 
 namespace Tests;
 
-use Illuminate\Routing\Route;
-
+/**
+ * Contains api endpoints for test purposes.
+ *
+ * @author Bruno Braga<bruonbraga.work@gmail.com>
+ */
 class ApiUrls
 {
-    const POST_BUILDINGS = "/api/buildings";
+    /** @var string POST_BUILDINGS */
+    const POST_BUILDINGS = '/api/buildings';
 
-    const POST_TEAMS = "/api/teams";
+    /** @var string POST_ADD_TASK_TO_TEAM */
+    const POST_ADD_TASK_TO_TEAM = '/api/buildings/:id/tasks';
 
-    const POST_ATTACH_USER_TO_TEAM = "/api/teams/:id/users";
+    /** @var string POST_TEAMS */
+    const POST_TEAMS = '/api/teams';
+
+    /** @var string POST_ATTACH_USER_TO_TEAM */
+    const POST_ATTACH_USER_TO_TEAM = '/api/teams/:id/users';
 }

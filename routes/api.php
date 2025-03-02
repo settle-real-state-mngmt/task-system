@@ -22,5 +22,4 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/teams', [TeamController::class, 'store']);
     Route::post('/teams/{team}/users', [TeamController::class, 'attachUserToTeam']);
-    /* Route::post('/users/staff', [UserController::class, 'storeStaff']); */
 });

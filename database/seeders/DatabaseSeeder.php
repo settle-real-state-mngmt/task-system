@@ -35,5 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $team = Team::factory()->create(['owner_id' => $owner->id]);
+
+        $team->users()->attach($teamMember);
     }
 }

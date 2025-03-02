@@ -114,6 +114,12 @@ The phases are not meant to be static “written in stone” kind of thing, they
 
 Now that the tasks are broken I have a pretty good idea about what is going to be developed. It is time to add grab each task and describe what needs to be done so development can start.
 
+- [] Use Response macro to create responses for each http status(?)
+- [] Add specific log channels for each entity
+- [] Refactor tests description
+- [] Check json contains proper error message on 422 tests
+- [] Clean tests to use Fakes class
+
 27/02/2025
 
 - [x] Add docker-compose to use sail
@@ -123,7 +129,6 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 28/02/2025
 
-- [] Use Response macro to create responses for each http status(?)
 - [x] Use sqlite for tests
 
 - [] Integration tests
@@ -162,11 +167,7 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [x] Add relationship to Building Model 
 - [] *Change RegisterFormRequest name to *StoreRequest
 - [x] Add fake data to Fakes class
-- [] Clean tests to use Fakes class
-- [] Add policy to check if logged user is owner of the team when adding a user to it
-- [] Add specific log channels for each entity
-- [] Refactor tests description
-- [] Check json contains proper error message on 422 tests
+- [x] Add policy to check if logged user is owner of the team when adding a user to it
 
 ### 
 

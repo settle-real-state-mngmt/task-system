@@ -11,7 +11,9 @@ use Illuminate\Notifications\Notifiable;
 
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
+use App\Models\Team;
 use App\Models\Building;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -75,5 +77,10 @@ class User extends Authenticatable implements JWTSubject
     public function buildings(): HasMany
     {
         return $this->hasMany(Building::class);
+    }
+
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class);
     }
 }

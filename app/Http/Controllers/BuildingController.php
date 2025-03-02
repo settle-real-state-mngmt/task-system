@@ -8,6 +8,7 @@ use Illuminate\Http\{Request, Response, JsonResponse};
 use Illuminate\Support\Facades\{Response as ResponseFacade, Auth, Log};
 
 use App\Models\Building;
+use App\Http\Requests\TaskStoreRequest;
 
 /**
  * Handles incoming request related to buildings.
@@ -60,15 +61,14 @@ class BuildingController extends Controller
      * @throws Exception
      * @return JsonResponse
      */
-    public function storeTask(Request $request, string $buildingId): JsonResponse
+    public function storeTask(TaskStoreRequest $request, string $buildingId): JsonResponse
     {
         try {
             $building = Building::where('id', $buildingId)
                 ->where('owner_id', Auth::user()->id)
                 ->first();
 
-            dump('here');
-            dd($building);
+            $building->tasks()->create($request->all());
 
             return ResponseFacade::json(
                 [
@@ -79,6 +79,8 @@ class BuildingController extends Controller
             );
         } catch (Exception $e) {
             Log::error($e->getMessage());
+
+            dump($e->getMessage());
 
             return ResponseFacade::json(
                 [
