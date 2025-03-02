@@ -119,6 +119,9 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [] Refactor tests description
 - [] Check json contains proper error message on 422 tests
 - [] Clean tests to use Fakes class
+- [] Remove all try catch from controllers and handle exceptions on app.php
+- [] Add to forge so they can test online
+- [] add telescope so they can see what's going on with the application
 
 27/02/2025
 
@@ -171,9 +174,13 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 02/03/2025
 
+- [] Add endpoint to list all tasks by building
+    - [] Add filters
 - [] Add policy to store task building
 - [] add integration tests for 422 on buildings
-- [] add comments
+- [x] add comments
+- [x] Add paginate to get responses
+- [] add integration tests for get tasks from building
 
 ### 
 

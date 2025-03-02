@@ -19,6 +19,14 @@ return new class extends Migration
             $table->foreignId('user_id')->constained();
             $table->timestamps();
         });
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->text('content');
+            $table->foreignId('task_id')->constained();
+            $table->foreignId('user_id')->constained();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -26,6 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('comments');
         Schema::dropIfExists('tasks');
     }
 };
