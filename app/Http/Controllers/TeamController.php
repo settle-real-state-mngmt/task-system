@@ -6,7 +6,7 @@ use App\Http\Requests\AttachUserToTeamRequest;
 use App\Http\Requests\TeamStoreRequest;
 use Exception;
 
-use Illuminate\Support\Facades\{Auth, DB, Response as ResponseFacade, Log};
+use Illuminate\Support\Facades\{Auth, DB, Gate, Response as ResponseFacade, Log};
 use Illuminate\Http\{Response, JsonResponse};
 
 use App\Models\Team;
@@ -62,6 +62,8 @@ class TeamController extends Controller
      */
     public function attachUserToTeam(AttachUserToTeamRequest $request, Team $team)
     {
+        Gate::authorize('attach', $team);
+
         try {
             $team->users()->attach($request->only('user_id'));
             $body = [

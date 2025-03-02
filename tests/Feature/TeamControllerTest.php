@@ -1,67 +1,93 @@
 <?php
 
-use Database\Seeders\DatabaseSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+namespace Tests\Feature;
+
 use Illuminate\Http\Response;
-use function Pest\Faker\fake;
+
+use Database\Seeders\DatabaseSeeder;
+
+use Tests\ApiUrls;
 use Tests\Fakes;
 
-uses(RefreshDatabase::class);
-
-$canSeed = false;
-beforeEach(function () use (&$canSeed) {
-    if (!$canSeed) {
-        $this->seed(DatabaseSeeder::class);
-    }
-    $canSeed = true;
-});
-
 beforeEach(function () {
-    $this->credentials = [
-        'email' => 'alandoe@example.org',
-        'password' => 'password'
-    ];
-
-    $this->fakeUser = [
-        'name' => 'John Doe',
-        'email' => 'johndoe@example.org',
-        'password' => 'password'
-    ];
-
-    $this->fakeTeam = [
-        'title' => fake()->title,
-        'owner_id' => Fakes::OWNER_ID
-    ];
-
-    $this->fakeBuilding = ['name' => 'Plus Ultra building'];
-
-    $loginResponse = $this->post('/api/login', $this->credentials);
-    $this->token = $loginResponse->getOriginalContent()['access_token'];
+    $this->seed(DatabaseSeeder::class);
 });
-
 
 /**
- * Check if /register is sign up users properly
+ * Check if a user can POST to /api/teams
  */
-test('test if POST to /api/teams returns 201', function () {
-    $response = $this->post(
-        '/api/teams',
-        $this->fakeTeam,
-        [
-            'accept' => 'application/json',
-            'Authorization' => $this->token
-        ]
+test('Test if user can create a team, should return 201', function () {
+    $response = $this->loginAsOwner()->post(
+        ApiUrls::POST_TEAMS,
+        Fakes::getFakeTeam()
     );
 
     $response->assertStatus(Response::HTTP_CREATED);
 });
 
 /**
- * Check if name has no more than 30 characters
+ * Check a POST request to /api/teams/{id}/users
+ * As a team owner
  */
-test('if /register returns 422 when passing more than 30 char to name', function () {
-    $this->fakeStaff['name'] = 'thisisanamethatdefinitelyhasmorethan30chars';
+test('Test if user can attach a user to a team that he/she owns, should return 201', function () {
+    $response = $this->loginAsOwner()->post(
+        strtr(
+            ApiUrls::POST_ATTACH_USER_TO_TEAM,
+            [':id' => Fakes::TEAM_ID]
+        ),
+        ['user_id' => Fakes::STAFF_ID],
+    );
 
-    $response = $this->post('/api/teams', $this->fakeStaff, ['accept' => 'application/json']);
+    $response->assertStatus(Response::HTTP_CREATED);
+});
+
+/**
+ * Check a POST request to /api/teams/{id}/users
+ * As a user
+ */
+test('Test if user can attach a user to a team that he/she DO NOT own, should return 403', function () {
+    $response = $this->loginAsStaff()->post(
+        strtr(
+            ApiUrls::POST_ATTACH_USER_TO_TEAM,
+            [':id' => Fakes::TEAM_ID]
+        ),
+        ['user_id' => Fakes::STAFF_ID],
+    );
+
+    $response->assertStatus(Response::HTTP_FORBIDDEN);
+});
+
+
+/**
+ * Check if a POST to /api/teams will throw 422
+ * when title has more than 30 characters
+ */
+test('Test if api validation for title is working, should return 422', function () {
+    $response = $this->loginAsOwner()->post(
+        '/api/teams',
+        [
+            ...Fakes::getFakeTeam(),
+            'title' => 'thisisatooooooooolongtitleforateam'
+        ],
+    );
+
     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    $response->assertJsonStructure(['errors' => ['title']]);
+});
+
+/**
+ * Check if a POST to /api/teams/{id}/users will throw 422
+ * when there is no user_id on the body of the request
+ */
+test('Test if api validation for user_id is working, should return 422', function () {
+    $response = $this->loginAsOwner()->post(
+        strtr(
+            ApiUrls::POST_ATTACH_USER_TO_TEAM,
+            [':id' => Fakes::TEAM_ID]
+        ),
+        ['errorerror' => Fakes::STAFF_ID],
+    );
+
+    $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    $response->assertJsonStructure(['errors' => ['user_id']]);
 });

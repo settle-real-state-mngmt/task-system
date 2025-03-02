@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Models\Building;
+use App\Models\Team;
 use App\Models\User;
 
 class DatabaseSeeder extends Seeder
@@ -16,15 +17,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $owner = User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.org',
+            'password' => 'password',
+        ]);
+
+        $teamMember = User::factory()->create([
             'name' => 'Alan Doe',
             'email' => 'alandoe@example.org',
             'password' => 'password',
         ]);
 
-        Building::factory()->create([
+        $building = Building::factory()->create([
             'name' => 'Doe Building',
             'owner_id' => User::first()->id
         ]);
+
+        $team = Team::factory()->create(['owner_id' => $owner->id]);
     }
 }
