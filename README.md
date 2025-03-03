@@ -114,14 +114,14 @@ The phases are not meant to be static “written in stone” kind of thing, they
 
 Now that the tasks are broken I have a pretty good idea about what is going to be developed. It is time to add grab each task and describe what needs to be done so development can start.
 
-- [] Use Response macro to create responses for each http status(?)
+- [x] Use Response macro to create responses for each http status(?)
 - [] Add specific log channels for each entity
 - [] Refactor tests description
 - [] Check json contains proper error message on 422 tests
 - [] Clean tests to use Fakes class
-- [] Remove all try catch from controllers and handle exceptions on app.php
+- [x] Remove all try catch from controllers and handle exceptions on app.php
 - [] Add to forge so they can test online
-- [] add telescope so they can see what's going on with the application
+- [x] add telescope so they can see what's going on with the application
 
 27/02/2025
 
@@ -134,11 +134,8 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 - [x] Use sqlite for tests
 
-- [] Integration tests
     - [x] POST /login
     - [x] POST /logout
-    - [ ] POST /me
-    - [ ] POST /refresh
     - [] Add form request to POST /login
 - [x] Add an endpoint so user can create a building
     - [x] Integration tests
@@ -165,7 +162,7 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
     - [x] Controller name
 - [x] Creating a team should be done via POST /teams
 - [x] Add endpoint to add a user to a team via POST /teams/{id}/users
-- [] Add form request for POST buildings
+- [x] Add form request for POST buildings
 - [x] Add PHPDocBlocks relatated to buildings
 - [x] Add relationship to Building Model 
 - [] *Change RegisterFormRequest name to *StoreRequest
@@ -174,13 +171,17 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 02/03/2025
 
-- [] Add endpoint to list all tasks by building
+- [x] Add endpoint to list all tasks by building
     - [] Add filters
 - [] Add policy to store task building
+- [] Add a policy to check if user owns buildings or is in hte staff to be able to fetch the the tasks
 - [] add integration tests for 422 on buildings
 - [x] add comments
 - [x] Add paginate to get responses
 - [] add integration tests for get tasks from building
+- [] Add task description as text instead of varchar
+- [] Check if user is already in a team before adding to it
+- [] Add test to check if user findorfail is working on /teams/1/users
 
 ### 
 
