@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\{Auth, DB};
+
 use App\Casts\Json;
-use Exception;
-
-use Illuminate\Http\{Request, Response, JsonResponse};
-use Illuminate\Support\Facades\{Response as ResponseFacade, Auth, DB, Log};
-
 use App\Models\Building;
-use App\Http\Requests\TaskStoreRequest;
+use App\Responses\{HttpOkResponse, HttpCreatedResponse};
+use App\Http\Requests\{TaskStoreRequest, BuildingStoreRequest};
 
 /**
  * Handles incoming request related to buildings.
@@ -19,8 +18,12 @@ use App\Http\Requests\TaskStoreRequest;
  */
 class BuildingController extends Controller
 {
-
-    public function index(int $buildingId)
+    /**
+     * Fetches all tasks and its comments from a buildingId
+     *
+     * @return JsonResponse
+     */
+    public function index(int $id): JsonResponse
     {
         $tasks = Building::query()
             ->select([
@@ -28,7 +31,6 @@ class BuildingController extends Controller
                 't.title',
                 't.description',
                 'u.name as assignee',
-                /* DB::raw('json_clean_array(array_to_json(array_agg(c))) as task_comments') */
                 DB::raw('jsonb_agg(json_build_object(\'id\', c.id, \'content\', c.content, \'name\', uc.name)) as task_comments')
             ])
             ->withCasts(['task_comments' => Json::class])
@@ -38,88 +40,59 @@ class BuildingController extends Controller
             ->leftJoin('comments as c', 't.id', '=', 'c.user_id')
             ->leftJoin('users as uc', 'c.user_id', '=', 'uc.id')
             ->where('buildings.owner_id', Auth::user()->id)
-            ->where('buildings.id', $buildingId)
+            ->where('buildings.id', $id)
             ->groupBy('t.id', 'uo.name', 'u.name')
             ->simplePaginate();
 
-        return ResponseFacade::json(
-            [
-                'message' => 'Task list from building id' . $buildingId,
-                'data' => $tasks
-            ],
-            Response::HTTP_OK
+
+        return HttpOkResponse::build(
+            $tasks,
+            'Task list from building id ' . $id
         );
     }
 
     /**
      * Stores a build by POST /buildings
      *
-     * @param  Request $request
-     * @throws Exception
+     * @param  BuildingStoreRequest $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+
+    public function store(BuildingStoreRequest $request): JsonResponse
     {
-        try {
-            $building = Building::create([
-                'owner_id' => Auth::user()->id,
-                ...$request->all()
-            ]);
+        $building = Building::create([
+            'owner_id' => Auth::user()->id,
+            ...$request->all()
+        ]);
 
-            return ResponseFacade::json(
-                [
-                    'message' => 'Building created with success!',
-                    'data' => $building
-                ],
-                Response::HTTP_CREATED
-            );
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-
-            return ResponseFacade::json(
-                [
-                    'message' => 'Uh, something went wrong, talk to the API admin in order to sort it out!',
-                    'data' => [],
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
+        return HttpCreatedResponse::build(
+            $building,
+            'Building created with success!',
+        );
     }
 
     /**
-     * Stores a task by POST /buildings/tasks
+     * Stores a task by POST /buildings/{building}/tasks
      *
-     * @param  Request $request
+     * @param  TaskStoreRequest $request
      * @param  string $buildingId
-     * @throws Exception
      * @return JsonResponse
      */
-    public function storeTask(TaskStoreRequest $request, string $buildingId): JsonResponse
+
+    public function storeTask(TaskStoreRequest $request, int $id): JsonResponse
     {
-        try {
-            $building = Building::where('id', $buildingId)
-                ->where('owner_id', Auth::user()->id)
-                ->first();
+        $building = Building::where('id', $id)
+            ->where('owner_id', Auth::user()->id)
+            ->first();
 
-            $building->tasks()->create($request->all());
+        $task = $building->tasks()->create([
+            ...$request->all(),
+            'building_id' => $id
+        ]);
 
-            return ResponseFacade::json(
-                [
-                    'message' => 'Building created with success!',
-                    'data' => $building
-                ],
-                Response::HTTP_CREATED
-            );
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-
-            return ResponseFacade::json(
-                [
-                    'message' => 'Uh, something went wrong, talk to the API admin in order to sort it out!',
-                    'data' => [],
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
+        return HttpCreatedResponse::build(
+            $task,
+            'Task created with success!'
+        );
     }
 }
