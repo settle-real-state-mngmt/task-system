@@ -9,6 +9,7 @@ use App\Models\Task;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +18,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        /**
+         * This is necessary for tests purposes as for each test
+         * that the DatabaseSeeder is run AND postgresql or mysql
+         * is being used instead of sqlite the ids need to be reseted.
+         */
+        DB::statement('TRUNCATE TABLE buildings RESTART IDENTITY CASCADE');
+        DB::statement('TRUNCATE TABLE tasks RESTART IDENTITY CASCADE');
+        DB::statement('TRUNCATE TABLE teams RESTART IDENTITY CASCADE');
+        DB::statement('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
+        DB::statement('TRUNCATE TABLE comments RESTART IDENTITY CASCADE');
 
         $owner = User::factory()->create([
             'name' => 'John Doe',
@@ -30,6 +40,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'alandoe@example.org',
             'password' => 'password',
         ]);
+
+        $randomUser = User::factory()->create([
+            'name' => 'Random Doe',
+            'email' => 'randomdoe@example.org',
+            'password' => 'password',
+        ]);
+
 
         $building = Building::factory()->create([
             'name' => 'Doe Building',

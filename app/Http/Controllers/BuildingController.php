@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\{Auth, DB};
+use Illuminate\Support\Facades\{Auth, DB, Gate};
 
 use App\Casts\Json;
 use App\Models\Building;
@@ -25,6 +25,8 @@ class BuildingController extends Controller
      */
     public function index(int $id): JsonResponse
     {
+        Gate::authorize('getBuildingTasks', Building::find($id));
+
         $tasks = Building::query()
             ->select([
                 't.id',
@@ -39,11 +41,9 @@ class BuildingController extends Controller
             ->join('users as uo', 'buildings.owner_id', '=', 'uo.id')
             ->leftJoin('comments as c', 't.id', '=', 'c.user_id')
             ->leftJoin('users as uc', 'c.user_id', '=', 'uc.id')
-            ->where('buildings.owner_id', Auth::user()->id)
             ->where('buildings.id', $id)
             ->groupBy('t.id', 'uo.name', 'u.name')
             ->simplePaginate();
-
 
         return HttpOkResponse::build(
             $tasks,
@@ -91,7 +91,7 @@ class BuildingController extends Controller
         ]);
 
         return HttpCreatedResponse::build(
-            $task,
+            $building->with('tasks')->get(),
             'Task created with success!'
         );
     }

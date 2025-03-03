@@ -10,10 +10,13 @@ namespace Tests;
 class ApiUrls
 {
     /** @var string POST_BUILDINGS */
-    const POST_BUILDINGS = '/api/buildings';
+    const BUILDINGS = '/api/buildings';
 
     /** @var string POST_ADD_TASK_TO_TEAM */
-    const POST_ADD_TASK_TO_TEAM = '/api/buildings/:id/tasks';
+    const ADD_TASK_TO_TEAM = '/api/buildings/:id/tasks';
+
+    /** @var string GET_BUILDING_TASKS */
+    const GET_BUILDING_TASKS  = '/api/buildings/:id/tasks';
 
     /** @var string POST_TEAMS */
     const POST_TEAMS = '/api/teams';

@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
-use App\Models\Team;
-use App\Policies\TeamPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Response as HttpStatus;
 use Illuminate\Support\Facades\Response;
+
+use App\Models\Building;
+use App\Models\Team;
+use App\Policies\BuildingPolicy;
+use App\Policies\TeamPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Team::class, TeamPolicy::class);
+        Gate::policy(Building::class, BuildingPolicy::class);
 
         Response::macro('ok', function ($value) {
             return Response::json($value, HttpStatus::HTTP_OK);
