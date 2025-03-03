@@ -76,6 +76,58 @@ class Fakes
         'user_id' => self::STAFF_ID
     ];
 
+    /** @var array INVALID_TEAM */
+    const INVALID_TEAM = [
+        'id' => 1,
+        'title' => 'thisisatooooooooolongtitleforateam',
+        'owner_id' => self::OWNER_ID
+    ];
+
+    /**
+     * @var array NULL_USER_ID
+     *
+     * Represents the body of a POST to /teams/{id}/users
+     */
+    const NULL_USER_ID = [
+        'user_id' => null
+    ];
+
+    /**
+     * @var array NOT_IN_DB_USER_ID
+     *
+     * Represents the body of a POST to /teams/{id}/users
+     */
+    const NOT_IN_DB_USER_ID = [
+        'user_id' => 999999999
+    ];
+
+    /**
+     * @var array STRING_USER_ID
+     *
+     * Represents the body of a POST to /teams/{id}/users
+     */
+    const STRING_USER_ID = [
+        'user_id' => 'adfhaiuhdfad'
+    ];
+
+    /**
+     * @var array OWNER_USER_ID
+     *
+     * Represents the body of a POST to /teams/{id}/users
+     */
+    const OWNER_USER_ID = [
+        'user_id' => self::OWNER_ID
+    ];
+
+    /**
+     * @var array STAFF_USER_ID
+     *
+     * Represents the body of a POST to /teams/{id}/users
+     */
+    const STAFF_USER_ID = [
+        'user_id' => self::STAFF_ID
+    ];
+
     /**
      * Generates fake team data for test purposes.
      *

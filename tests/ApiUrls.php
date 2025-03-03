@@ -19,7 +19,7 @@ class ApiUrls
     const POST_TEAMS = '/api/teams';
 
     /** @var string POST_ATTACH_USER_TO_TEAM */
-    const POST_ATTACH_USER_TO_TEAM = '/api/teams/:id/users';
+    const ATTACH_USER_TO_TEAM = '/api/teams/:id/users';
 
     /** @var string POST_LOGIN */
     const LOGIN = '/api/login';
