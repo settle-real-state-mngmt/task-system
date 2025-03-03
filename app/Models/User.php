@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 use App\Models\Team;
 use App\Models\Building;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -74,11 +72,21 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    /**
+     * One User HasMany Buildings
+     *
+     * @return HasMany
+     */
     public function buildings(): HasMany
     {
         return $this->hasMany(Building::class);
     }
 
+    /**
+     * One User BelongsToMany Teams
+     *
+     * @return BelongsToMany
+     */
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class);
