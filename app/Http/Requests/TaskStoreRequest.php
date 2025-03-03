@@ -23,7 +23,7 @@ class TaskStoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:50'],
-            'user_id' => ['required']
+            'user_id' => ['required'],
         ];
     }
 }

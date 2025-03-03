@@ -24,6 +24,8 @@ class Fakes
     /** @var int FAKE_BUILDING_ID */
     const FAKE_BUILDING_ID = 1;
 
+    const TASK_ID = 1;
+
     /**
      * @var array FAKE_USER
      *
@@ -127,7 +129,7 @@ class Fakes
     /**
      * @var array FAKE_TASK
      *
-     * Represents a task for building with 1 1
+     * Represents a task for building with id 1
      * and user with id 2
      */
     const FAKE_TASK = [
@@ -191,6 +193,12 @@ class Fakes
      */
     const STAFF_USER_ID = [
         'user_id' => self::STAFF_ID
+    ];
+
+    const FAKE_COMMENT = [
+        'content' => 'this is the description of the ',
+        'user_id' => self::STAFF_ID,
+        'task_id' => 1
     ];
 
     /**

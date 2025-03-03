@@ -98,11 +98,11 @@ The phases are not meant to be static “written in stone” kind of thing, they
 - [x] Add laravel boilerplate
 - [x] Add docker-compose to use sail
 - [x] Add endpoint for user sign up
-- [ ] Add endpoint for creating a new building
+- [x] Add endpoint for creating a new building
 - [ ] The user who creates a building is the builder owner
-- [ ] Add an endpoint to add a new staff
-- [ ] Add an endpoint to create a task
-- [ ] Add an endpoint to create comments for a task
+- [x] Add an endpoint to add a new staff
+- [x] Add an endpoint to create a task
+- [] Add an endpoint to create comments for a task
 - [ ] Add filter to the task endpoint
     - [ ] date range
     - [ ] status
@@ -134,9 +134,9 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 - [x] Use sqlite for tests
 
-    - [x] POST /login
-    - [x] POST /logout
-    - [] Add form request to POST /login
+- [x] POST /login
+- [x] POST /logout
+- [] Add form request to POST /login
 - [x] Add an endpoint so user can create a building
     - [x] Integration tests
         - [x] POST /buildings
@@ -173,14 +173,14 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 - [x] Add endpoint to list all tasks by building
     - [] Add filters
-- [] Add policy to store task building
-- [] Add a policy to check if user owns buildings or is in hte staff to be able to fetch the the tasks
-- [] add integration tests for 422 on buildings
+- [x] Add policy to store task building
+- [x] Add a policy to check if user owns buildings or is in hte staff to be able to fetch the the tasks
+- [x] add integration tests for 422 on buildings
 - [x] add comments
 - [x] Add paginate to get responses
-- [] add integration tests for get tasks from building
-- [] Add task description as text instead of varchar
-- [] Check if user is already in a team before adding to it
+- [x] add integration tests for get tasks from building
+- [x] Add task description as text instead of varchar
+- [x] Check if user is already in a team before adding to it
 - [] Add test to check if user findorfail is working on /teams/1/users
 
 ### 

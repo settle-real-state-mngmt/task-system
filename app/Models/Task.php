@@ -28,12 +28,13 @@ class Task extends Model
         'user_id',
     ];
 
-    public function building()
+
+    public function building(): BelongsTo
     {
         return $this->belongsTo(Building::class);
     }
 
-    public function users()
+    public function users(): HasOne
     {
         return $this->hasOne(User::class);
     }

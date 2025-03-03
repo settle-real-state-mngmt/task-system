@@ -29,4 +29,6 @@ class ApiUrls
 
     /** @var string USERS */
     const USERS = '/api/users';
+
+    const ADD_COMMENT_TO_TASK = '/api/tasks/:id/comments';
 }
