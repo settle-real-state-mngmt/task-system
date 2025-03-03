@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+use App\Models\User;
 
 /**
  * Handles database operation for table teams.
@@ -28,6 +27,11 @@ class Team extends Model
         'owner_id',
     ];
 
+    /**
+     * A user belongs to many teams
+     *
+     * @return BelongsToMany
+     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);

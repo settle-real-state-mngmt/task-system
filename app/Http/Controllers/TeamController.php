@@ -6,10 +6,12 @@ use App\Http\Requests\AttachUserToTeamRequest;
 use App\Http\Requests\TeamStoreRequest;
 use Exception;
 
-use Illuminate\Support\Facades\{Auth, DB, Gate, Response as ResponseFacade, Log};
+use Illuminate\Support\Facades\{Auth, Gate, Response as ResponseFacade, Log};
 use Illuminate\Http\{Response, JsonResponse};
 
 use App\Models\Team;
+use App\Models\User;
+use App\Responses\HttpCreatedResponse;
 
 /**
  * Handles incoming request related to teams.
@@ -20,36 +22,22 @@ use App\Models\Team;
 class TeamController extends Controller
 {
     /**
-     * Registers a user by POST /store.
+     * Creates a team by POST /api/teams.
      *
      * @param  UserRegisterRequest $request
-     * @throws Exception
      * @return JsonResponse
      */
     public function store(TeamStoreRequest $request): JsonResponse
     {
-        try {
-            $team = Team::create($request->all());
-            $body = [
-                'message' => 'Team successfuly created!',
-                'data' => $team
-            ];
+        $team = Team::create([
+            ...$request->all(),
+            'owner_id' => Auth::user()->id
+        ]);
 
-            return ResponseFacade::json(
-                $body,
-                Response::HTTP_CREATED
-            );
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
-
-            return ResponseFacade::json(
-                [
-                    'message' => 'Uh, something went wrong, talk to the API admin in order to sort it out!',
-                    'data' => [],
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
+        return HttpCreatedResponse::build(
+            $team,
+            'Team successfuly created!',
+        );
     }
 
     /**
@@ -57,34 +45,20 @@ class TeamController extends Controller
      *
      * @param  AttachUserToTeamRequest $request
      * @param  Team $team
-     * @throws Exception
      * @return
      */
     public function attachUserToTeam(AttachUserToTeamRequest $request, Team $team)
     {
         Gate::authorize('attach', $team);
 
-        try {
-            $team->users()->attach($request->only('user_id'));
-            $body = [
-                'message' => 'User Attached to the team successfuly!',
-                'data' => $team
-            ];
+        $userId = $request->only('user_id');
+        User::findOrFail($userId);
 
-            return ResponseFacade::json(
-                $body,
-                Response::HTTP_CREATED
-            );
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
+        $team->users()->attach($userId);
 
-            return ResponseFacade::json(
-                [
-                    'message' => 'Uh, something went wrong, talk to the API admin in order to sort it out!',
-                    'data' => [],
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
+        return HttpCreatedResponse::build(
+            $team,
+            'User Attached to the team successfuly!',
+        );
     }
 }

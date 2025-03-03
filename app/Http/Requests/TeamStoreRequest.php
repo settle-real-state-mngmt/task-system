@@ -22,8 +22,7 @@ class TeamStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'max:15'],
-            'owner_id' => ['required']
+            'title' => ['required', 'max:15']
         ];
     }
 }

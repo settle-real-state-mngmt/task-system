@@ -34,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
             return Response::json($value, HttpStatus::HTTP_CREATED);
         });
 
+        Response::macro('notfound', function ($value) {
+            return Response::json($value, HttpStatus::HTTP_NOT_FOUND);
+        });
+
         Response::macro('unprocessableentity', function ($value) {
             return Response::json($value, HttpStatus::HTTP_UNPROCESSABLE_ENTITY);
         });
