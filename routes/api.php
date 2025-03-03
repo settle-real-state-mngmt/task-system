@@ -19,7 +19,7 @@ Route::post('/login', [AuthController::class, 'login']);
  * using auth:api middleware
  */
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/buildings/{id}/tasks', [BuildingController::class, 'index']);
     Route::post('/buildings', [BuildingController::class, 'store']);

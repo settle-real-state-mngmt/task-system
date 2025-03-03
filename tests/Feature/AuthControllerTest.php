@@ -41,7 +41,7 @@ test('if status is 204 when user logs out', function () use ($credentials) {
 
     $token = $loginResponse->getOriginalContent()['access_token'];
 
-    $response = $this->post('/api/auth/logout', [], [
+    $response = $this->post('/api/logout', [], [
         'Accept' => 'application/json',
         'Authorization' => $token
     ]);
@@ -52,6 +52,6 @@ test('if status is 204 when user logs out', function () use ($credentials) {
  * Check if /logout returns proper keys and token
  */
 test('if status is 401 when user logs out without being logged in', function () use ($credentials) {
-    $response = $this->post('/api/auth/logout', $credentials, ['Accept' => 'application/json']);
+    $response = $this->post('/api/logout', $credentials, ['Accept' => 'application/json']);
     $response->assertStatus(Response::HTTP_UNAUTHORIZED);
 });
