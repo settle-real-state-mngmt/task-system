@@ -21,6 +21,41 @@ class Fakes
     /** @var int FAKE_BUILDING_ID */
     const FAKE_BUILDING_ID = 1;
 
+    /** @var array FAKE_USER */
+    const FAKE_USER = [
+        'name' => 'John Doe',
+        'email' => 'johndoe@example.org',
+        'password' => 'password'
+    ];
+
+    /** @var array FAKE_USER_INVALID_FIELDS */
+    const FAKE_USER_INVALID_FIELDS = [
+        'name' => 'thisisanamethatdefinitelyhasmorethan30chars',
+        'email' => 'johndoe',
+        'password' => '1'
+    ];
+
+    /** @var array FAKE_USER */
+    const FAKE_USER_INVALID_NAME = [
+        'name' => 'thisisanamethatdefinitelyhasmorethan30chars',
+        'email' => 'johndoe@example.org',
+        'password' => 'password'
+    ];
+
+    /** @var array FAKE_USER */
+    const FAKE_USER_INVALID_EMAIL = [
+        'name' => 'John Doe',
+        'email' => 'johndoe',
+        'password' => 'password'
+    ];
+
+    /** @var array FAKE_USER */
+    const FAKE_USER_INVALID_PASSWORD = [
+        'name' => 'John Doe',
+        'email' => 'johndoe@example.org',
+        'password' => '1'
+    ];
+
     /** @var array FAKE_TEAM */
     const FAKE_TEAM = [
         'id' => 1,
