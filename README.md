@@ -1,13 +1,10 @@
 # Task system
 
-Given the project description provided via email.
-I've broke the development into phases which will be listed below.
-
 ## Index
 
 - [Requirements](#Requeriments)
-- [Setting up](#Setting up)
-- [Technical requirements](#Technical Requirements)
+- [Setting up](#Setting-up)
+- [Technical requirements](#Technical-requirements)
 - [Documentation](#Documentation)
 	- [Database](#Database)
 
@@ -27,6 +24,8 @@ cd task-system
 make install
 ```
 
+By running the above you will be cloning the repo, going into its root folder and running make install.
+
 The command make install will:
 
 1. Install the project dependencies
@@ -42,8 +41,37 @@ In case you do not have docker installed follow [this](https://github.com/settle
 
 ### Database
 
-<mark style="background-color:red">test</mark>
+Given the project description and the Technical requirements here is the process I've followed in order to build the database.
 
+A client needs to manage multiple buildings.
+Owners to create tasks for their teams within each building.
+Each task has comments.
+Tasks have 4 possible status Open, In Progres, Completed or Rejected.
+
+Now that I have the requirements based on the description I can break them down more...
+
+A user can create buildings.
+There are two roles in the system:
+1. Building Owner
+2. Team member
+
+Building owners are the ones who create the building.
+Team owners are the ones who create the team.
+Owners and Team members can create tasks and comments
+Team members that are not part of the same team can't see each others task
+
+We can break one layer further before building the ER itself:
+
+A user has one or many buildings.
+A user has one or many teams.
+A building has one or many tasks.
+A task has one or many comments.
+
+Which ended up being the ER below.
+
+![ER](ER.jpg)
+
+With that I can achieve every [requirement](#Technical requirements).
 
 ## Technical requirements
 

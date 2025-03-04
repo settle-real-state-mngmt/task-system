@@ -24,9 +24,12 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->foreignId('task_id')->constained();
+            $table->foreignId('task_id')->constained(table: 'tasks');
             $table->foreignId('user_id')->constained();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('task_id')->references('id')->on('tasks');
         });
     }
 
