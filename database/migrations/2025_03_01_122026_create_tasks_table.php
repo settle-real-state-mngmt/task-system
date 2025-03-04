@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
+            $table->enum('status', ['Open', 'In Progress', 'Completed', 'Rejected']);
             $table->foreignId('building_id')->constrained();
             $table->foreignId('user_id')->constained();
             $table->timestamps();
