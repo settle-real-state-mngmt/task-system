@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\{Auth, DB, Gate};
+use Illuminate\Support\Str;
 
 use App\Casts\Json;
 use App\Models\Building;
 use App\Responses\{HttpOkResponse, HttpCreatedResponse};
 use App\Http\Requests\{TaskStoreRequest, BuildingStoreRequest, TaskUpdateRequest};
 use App\Models\Task;
+use Illuminate\Http\Request;
 
 /**
  * Handles incoming request related to buildings.
@@ -24,30 +26,30 @@ class BuildingController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(int $id): JsonResponse
+    public function index(Request $request, int $id): JsonResponse
     {
         Gate::authorize('getBuildingTasks', Building::find($id));
 
-        $tasks = Building::query()
-            ->select([
-                't.id',
-                't.title',
-                't.description',
-                'u.name as assignee',
-                DB::raw('jsonb_agg(json_build_object(\'id\', c.id, \'content\', c.content, \'name\', uc.name)) as task_comments')
-            ])
-            ->withCasts(['task_comments' => Json::class])
-            ->join('tasks as t', 't.building_id', '=', 'buildings.id')
-            ->join('users as u', 't.user_id', '=', 'u.id')
-            ->join('users as uo', 'buildings.owner_id', '=', 'uo.id')
-            ->leftJoin('comments as c', 't.id', '=', 'c.user_id')
-            ->leftJoin('users as uc', 'c.user_id', '=', 'uc.id')
-            ->where('buildings.id', $id)
-            ->groupBy('t.id', 'uo.name', 'u.name')
-            ->simplePaginate();
+        $tasks = Building::getTasks($id);
+
+        if ($request->query('status')) {
+            $tasks->where('status', Str::ucfirst($request->query('status')));
+        }
+
+        if ($request->query('assignee')) {
+            $tasks->where('t.user_id', $request->query('assignee'));
+        }
+
+        if ($request->query('start')) {
+            $tasks->where('t.created_at', '>=', $request->query('start'));
+        }
+
+        if ($request->query('end')) {
+            $tasks->where('t.created_at', '<=', $request->query('end'));
+        }
 
         return HttpOkResponse::build(
-            $tasks,
+            $tasks->simplePaginate(),
             'Task list from building id ' . $id
         );
     }

@@ -22,9 +22,11 @@ class CommentStoreRequest extends FormRequest
             return true;
         }
 
+        //TODO: this does not make sense
         return DB::table('team_user')
             ->select('user_id')
-            ->where('user_id', Auth::user()->id)->exists();
+            ->where('user_id', Auth::user()->id)
+            ->exists();
     }
 
     /**

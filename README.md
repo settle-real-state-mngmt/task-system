@@ -122,6 +122,7 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [x] Remove all try catch from controllers and handle exceptions on app.php
 - [] Add to forge so they can test online
 - [x] add telescope so they can see what's going on with the application
+- [x] Use sqlite for tests
 
 27/02/2025
 
@@ -132,7 +133,6 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 
 28/02/2025
 
-- [x] Use sqlite for tests
 
 - [x] POST /login
 - [x] POST /logout
@@ -182,6 +182,8 @@ Now that the tasks are broken I have a pretty good idea about what is going to b
 - [x] Add task description as text instead of varchar
 - [x] Check if user is already in a team before adding to it
 - [] Add test to check if user findorfail is working on /teams/1/users
+- [] Check if authorization can effectively be done via FormRequest on places that are using form Requests.
+- [] add created_at and updated_at on team_user table
 
 ### 
 
