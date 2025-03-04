@@ -99,7 +99,6 @@ test('Test if a user(as the owner) can create a task for a building', function (
         Fakes::FAKE_TASK
     );
 
-
     $response->assertCreated();
     $response->assertExactJsonStructure([
         'message',
@@ -111,7 +110,7 @@ test('Test if a user(as the owner) can create a task for a building', function (
                 'created_at',
                 'updated_at',
                 'tasks' => [
-                    '*' => ['id', 'title', 'description', 'user_id', 'building_id', 'created_at', 'updated_at']
+                    '*' => ['id', 'title', 'status', 'description', 'user_id', 'building_id', 'created_at', 'updated_at']
                 ],
             ],
         ]
