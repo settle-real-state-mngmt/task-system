@@ -79,15 +79,11 @@ class BuildingController extends Controller
      * @return JsonResponse
      */
 
-    public function storeTask(TaskStoreRequest $request, int $id): JsonResponse
+    public function storeTask(TaskStoreRequest $request, Building $building): JsonResponse
     {
-        $building = Building::where('id', $id)
-            ->where('owner_id', Auth::user()->id)
-            ->first();
-
-        $task = $building->tasks()->create([
+        $building->tasks()->create([
             ...$request->all(),
-            'building_id' => $id
+            'building_id' => $building->id
         ]);
 
         return HttpCreatedResponse::build(

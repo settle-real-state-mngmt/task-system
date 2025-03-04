@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TaskStoreRequest extends FormRequest
 {
@@ -11,7 +13,13 @@ class TaskStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if ($this->building->owner_id == Auth::user()->id) {
+            return true;
+        }
+
+        return DB::table('team_user')
+            ->select('user_id')
+            ->where('user_id', Auth::user()->id)->exists();
     }
 
     /**
