@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\{Auth, DB, Gate};
 use App\Casts\Json;
 use App\Models\Building;
 use App\Responses\{HttpOkResponse, HttpCreatedResponse};
-use App\Http\Requests\{TaskStoreRequest, BuildingStoreRequest};
+use App\Http\Requests\{TaskStoreRequest, BuildingStoreRequest, TaskUpdateRequest};
+use App\Models\Task;
 
 /**
  * Handles incoming request related to buildings.
@@ -89,6 +90,28 @@ class BuildingController extends Controller
         return HttpCreatedResponse::build(
             $building->with('tasks')->get(),
             'Task created with success!'
+        );
+    }
+
+    /**
+     * Updates a task by PUT to /buildings/{building}/tasks/{task}
+     *
+     * @param  TaskUpdateRequest $request
+     * @param  Building $building
+     * @param  Task $task
+     * @return JsonResponse
+     */
+    public function updateTask(
+        TaskUpdateRequest $request,
+        Building $building,
+        Task $task
+    ): JsonResponse {
+        $task->update($request->all());
+        $task->fresh();
+
+        return HttpOkResponse::build(
+            $task,
+            'Task updated successfully!'
         );
     }
 }

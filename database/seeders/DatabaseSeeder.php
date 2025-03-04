@@ -41,6 +41,13 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
         ]);
 
+        $teamMember2 = User::factory()->create([
+            'name' => 'Abby Doe',
+            'email' => 'abbydoe@example.org',
+            'password' => 'password',
+        ]);
+
+
         $randomUser = User::factory()->create([
             'name' => 'Random Doe',
             'email' => 'randomdoe@example.org',
@@ -55,6 +62,7 @@ class DatabaseSeeder extends Seeder
 
         $team = Team::factory()->create(['owner_id' => $owner->id]);
         $team->users()->attach($teamMember);
+        $team->users()->attach($teamMember2);
 
         Task::factory(2)->create([
             'user_id' => $teamMember->id,

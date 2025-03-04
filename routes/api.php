@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/buildings/{id}/tasks', [BuildingController::class, 'index']);
     Route::post('/buildings', [BuildingController::class, 'store']);
     Route::post('/buildings/{building}/tasks', [BuildingController::class, 'storeTask']);
+    Route::put('/buildings/{building}/tasks/{task}', [BuildingController::class, 'updateTask']);
 
     Route::post('/tasks/{task}/comments', [TaskController::class, 'storeComments']);
 });
