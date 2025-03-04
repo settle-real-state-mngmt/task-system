@@ -36,8 +36,6 @@ test('Test if a user can\'t get tasks from a building that is not working for', 
     $response->assertForbidden();
 });
 
-
-
 /**
  * Check if a user can POST to /api/buildings
  */

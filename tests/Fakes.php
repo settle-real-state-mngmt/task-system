@@ -16,7 +16,7 @@ class Fakes
     const STAFF_ID = 2;
 
     /** @var int NON_STAFF_ID */
-    const NON_STAFF_ID = 3;
+    const NON_STAFF_ID = 4;
 
     /** @var int TEAM_ID */
     const TEAM_ID = 1;
