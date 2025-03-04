@@ -4,8 +4,8 @@ services:
             context: './docker/8.3'
             dockerfile: Dockerfile
             args:
-                WWWGROUP: '${WWWGROUP}'
-        image: 'sail-8.4/app'
+                WWWGROUP: '1000'
+        image: 'sail-8.3/app'
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
