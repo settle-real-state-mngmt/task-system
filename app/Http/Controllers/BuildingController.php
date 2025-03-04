@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\{Auth, DB, Gate};
+use Illuminate\Support\Facades\{Auth, Gate};
 use Illuminate\Support\Str;
 
-use App\Casts\Json;
 use App\Models\Building;
 use App\Responses\{HttpOkResponse, HttpCreatedResponse};
 use App\Http\Requests\{TaskStoreRequest, BuildingStoreRequest, TaskUpdateRequest};
+use App\Http\Resources\BuildingTasksResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -48,8 +48,10 @@ class BuildingController extends Controller
             $tasks->where('t.created_at', '<=', $request->query('end'));
         }
 
+        $resource = new BuildingTasksResource($tasks->simplePaginate()->toArray());
+
         return HttpOkResponse::build(
-            $tasks->simplePaginate(),
+            $resource->toArray($request),
             'Task list from building id ' . $id
         );
     }

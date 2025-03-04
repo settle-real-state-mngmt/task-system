@@ -12,12 +12,39 @@ beforeEach(function () {
 /**
  *
  */
-test('Test if a building owner can get tasks from an own building', function () {
+test('Test if a building owner can herhehrehreget tasks from an own building', function () {
     $response = $this->loginAsOwner()->get(
         strtr(ApiUrls::GET_BUILDING_TASKS, [':id' => Fakes::FAKE_BUILDING_ID]),
     );
 
     $response->assertOk();
+    $response->assertExactJsonStructure([
+        'message',
+        'data' => [
+            '*' => [
+                'id',
+                'title',
+                'status',
+                'description',
+                'assignee',
+                'created_at',
+                'task_comments' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'content'
+                    ]
+                ]
+            ],
+        ],
+        'current_page',
+        'path',
+        'first_page_url',
+        'from',
+        'next_page_url',
+        'per_page',
+        'prev_page_url',
+    ]);
 });
 
 test('Test if a staff can get tasks from a building that is working for', function () {

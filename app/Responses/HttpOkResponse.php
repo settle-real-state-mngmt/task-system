@@ -2,8 +2,10 @@
 
 namespace App\Responses;
 
+use App\Http\Resources\BuildingTasksResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 
@@ -16,11 +18,18 @@ use Illuminate\Support\Collection;
  */
 class HttpOkResponse
 {
-    public static function build(Model|Collection|Paginator $data, string $msg): JsonResponse
+    public static function build(Model|Collection|array $data, string $msg): JsonResponse
     {
+        $body = [];
+        if (is_array($data)) {
+            $body = [...$data];
+        } else {
+            $body = ['data' => $data];
+        }
+
         return response()->ok([
             'message' => $msg,
-            'data' => $data
+            ...$body
         ]);
     }
 }
