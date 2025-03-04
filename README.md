@@ -8,16 +8,25 @@
 - [Documentation](#Documentation)
 	- [Database](#Database)
 
-
-
 ## Requirements
 
+
 In order to run this project you either need to have docker and docker-compose installed OR php and composer.
+
+For method 1
+
+- Docker
+- docker-compose
+- make
+
+For method 2
+
 
 ## Setting up
 
 Run the following commands:
 
+1.
 ```
 git clone https://github.com/settle-real-state-mngmt/task-system.git
 cd task-system
@@ -35,12 +44,50 @@ The command make install will:
 5. Generate a jwt secret
 6. Run our migrations and seeders
 
-In case you do not have docker installed follow [this](https://github.com/settle-real-state-mngmt/task-system/wiki/Set-up-without-docker) section on the project wiki!
+2.
+A second way of installing the application is by running the following commands:
+
+```
+git clone https://github.com/settle-real-state-mngmt/task-system.git
+cd task-system
+cp .env.example .env
+docker-compose up -d
+```
+
+After the container is up you can run
+
+```
+composer install
+```
+
+## Tests
+
+```
+./vendor/bin/sail test
+```
+
+[alltests](alltests.jpg)
+
 
 ## Documentation
 
+## Endpoints
+
+This api ships with a swagger documentation! you can access it on http://localhost/docs/api endpoing.
+
+## Telescope
+
+Telescope was installed if you would like to have any insights about the project. You can access via  http://localhost/telescope.
+
 ### Database
 
+pgAdmin 4 was added to the docker image if you would like to check anything with the database. You can access on  http://localhost:5050/.
+
+> admin@admin.com and password for the default credentials.
+
+> Ah don't forget to use docker's alias in there add a server.
+
+#### Process
 Given the project description and the Technical requirements here is the process I've followed in order to build the database.
 
 A client needs to manage multiple buildings.
@@ -69,7 +116,7 @@ A task has one or many comments.
 
 Which ended up being the ER below.
 
-![ER](ER.jpg)
+[ER](ER.jpg)
 
 With that I can achieve every [requirement](#Technical requirements).
 
