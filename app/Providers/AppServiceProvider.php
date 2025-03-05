@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Response as HttpStatus;
 use Illuminate\Support\Facades\Response;
-
 use App\Models\Building;
 use App\Models\Team;
 use App\Policies\BuildingPolicy;

@@ -17,7 +17,7 @@ class BuildingPolicy
     /**
      * Determine whether the user can add a user to a team specific team.
      *
-     * @param  User $user
+     * @param  User     $user
      * @param  Building $building
      * @return bool
      */

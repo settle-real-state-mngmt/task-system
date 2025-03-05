@@ -4,8 +4,6 @@ namespace App\Models;
 
 use App\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Models\Task;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,7 +42,7 @@ class Building extends Model
     /**
      * Get all tasks from a given building.
      *
-     * @param  int $id
+     * @param  int     $id
      * @return Builder
      */
     public static function getTasks(int $id): Builder

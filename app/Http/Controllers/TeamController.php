@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AttachUserToTeamRequest;
 use App\Http\Requests\TeamStoreRequest;
-use Exception;
-
-use Illuminate\Support\Facades\{Auth, Gate, Response as ResponseFacade, Log};
-use Illuminate\Http\{Response, JsonResponse};
-
+use Illuminate\Support\Facades\{Auth, Gate};
+use Illuminate\Http\{JsonResponse};
 use App\Models\Team;
 use App\Models\User;
 use App\Responses\HttpCreatedResponse;
@@ -43,8 +40,8 @@ class TeamController extends Controller
     /**
      * Attaches a user to the $team by POST /teams/{id}/users
      *
-     * @param  AttachUserToTeamRequest $request
-     * @param  Team $team
+     * @param AttachUserToTeamRequest $request
+     * @param Team                    $team
      * @return
      */
     public function attachUserToTeam(AttachUserToTeamRequest $request, Team $team)

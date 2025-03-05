@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Policies\BuildingPolicy;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

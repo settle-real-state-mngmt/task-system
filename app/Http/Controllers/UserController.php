@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-
 use App\Models\User;
 use App\Responses\HttpCreatedResponse;
 use App\Http\Requests\UserRegisterRequest;

@@ -2,11 +2,8 @@
 
 namespace App\Responses;
 
-use App\Http\Resources\BuildingTasksResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 
 /**

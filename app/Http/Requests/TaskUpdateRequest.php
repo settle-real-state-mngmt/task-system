@@ -7,7 +7,6 @@ use App\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class TaskUpdateRequest extends FormRequest

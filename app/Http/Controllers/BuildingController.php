@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\{Auth, Gate};
 use Illuminate\Support\Str;
-
 use App\Models\Building;
 use App\Responses\{HttpOkResponse, HttpCreatedResponse};
 use App\Http\Requests\{TaskStoreRequest, BuildingStoreRequest, TaskUpdateRequest};
@@ -62,7 +61,6 @@ class BuildingController extends Controller
      * @param  BuildingStoreRequest $request
      * @return JsonResponse
      */
-
     public function store(BuildingStoreRequest $request): JsonResponse
     {
         $building = Building::create([
@@ -80,10 +78,9 @@ class BuildingController extends Controller
      * Stores a task by POST /buildings/{building}/tasks
      *
      * @param  TaskStoreRequest $request
-     * @param  string $buildingId
+     * @param  string           $buildingId
      * @return JsonResponse
      */
-
     public function storeTask(TaskStoreRequest $request, Building $building): JsonResponse
     {
         $building->tasks()->create([
@@ -101,8 +98,8 @@ class BuildingController extends Controller
      * Updates a task by PUT to /buildings/{building}/tasks/{task}
      *
      * @param  TaskUpdateRequest $request
-     * @param  Building $building
-     * @param  Task $task
+     * @param  Building          $building
+     * @param  Task              $task
      * @return JsonResponse
      */
     public function updateTask(

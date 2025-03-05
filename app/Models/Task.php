@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
-use App\Models\Building;
-use App\Models\User;
-use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
@@ -27,7 +23,6 @@ class Task extends Model
         'building_id',
         'user_id',
     ];
-
 
     public function building(): BelongsTo
     {

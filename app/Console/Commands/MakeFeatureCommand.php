@@ -26,7 +26,7 @@ class MakeFeatureCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $tableName = text('Type the name of your migration table');
         $ctrlName = text('Type the name of your controller');
