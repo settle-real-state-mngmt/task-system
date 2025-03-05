@@ -7,7 +7,7 @@
 - [Technical requirements](#Technical-requirements)
 - [Documentation](#Documentation)
 	- [Endpoints](#Endpoints)
-        - [Flow of the API](#Flow-of-the-API)
+        - [Flow of use of the API](#Flow-of-use-of-the-API)
 	- [Telescope](#Telescope)
 	- [Database](#Database)
         - [Process](#Process)
