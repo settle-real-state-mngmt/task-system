@@ -7,9 +7,11 @@
 - [Technical requirements](#Technical-requirements)
 - [Documentation](#Documentation)
 	- [Endpoints](#Endpoints)
+        - [Flow of the API](#Flow-of-the-API)
 	- [Telescope](#Telescope)
 	- [Database](#Database)
         - [Process](#Process)
+- [What Could be better?](#What-could-be-better)
 
 ## Requirements
 
@@ -200,6 +202,10 @@ With that I can achieve every [requirement](#Technical requirements).
 - [x] Type methods and parameters for improved code clarity. 
 - [x] Include descriptive PHPDoc in the methods.
 
-## Could be better?
+## What could be better?
 
-Improvements are endless, but, things I notice while develop was:
+I think the database structure could be a little different specially because the access controlls I did got a little difficult to do.
+
+Also I wish I had done something better towards the filter I have the feeling that query scopes would be a good fit for them but I figure them out to late.
+
+My commits... some sometimes they got too big with like 12 files, though to be fair, creating a feature with laravel sometimes require multiple classes. Anyhow I think some sort of trunk base development would be better.
