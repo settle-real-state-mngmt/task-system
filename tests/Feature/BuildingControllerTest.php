@@ -10,9 +10,86 @@ beforeEach(function () {
 });
 
 /**
- *
+ * Check if assignee filter is working
  */
-test('Test if a building owner can herhehrehreget tasks from an own building', function () {
+test('Test if assignee filter is working', function () {
+    $response = $this->loginAsOwner()->get(
+        strtr(ApiUrls::GET_BUILDING_TASKS . '?assignee=' . Fakes::OWNER_ID, [':id' => Fakes::FAKE_BUILDING_ID]),
+    );
+
+    $response->assertOk();
+    $response->assertExactJsonStructure([
+        'message',
+        'data' => [
+            '*' => [
+                'id',
+                'title',
+                'status',
+                'description',
+                'assignee',
+                'created_at',
+                'task_comments' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'content'
+                    ]
+                ]
+            ],
+        ],
+        'current_page',
+        'path',
+        'first_page_url',
+        'from',
+        'next_page_url',
+        'per_page',
+        'prev_page_url',
+    ]);
+});
+
+/**
+ * Check if status filter is working
+ */
+test('Test if status filter is working', function () {
+    $response = $this->loginAsOwner()->get(
+        strtr(ApiUrls::GET_BUILDING_TASKS . '?status=open', [':id' => Fakes::FAKE_BUILDING_ID]),
+    );
+
+    $response->assertOk();
+    $response->assertExactJsonStructure([
+        'message',
+        'data' => [
+            '*' => [
+                'id',
+                'title',
+                'status',
+                'description',
+                'assignee',
+                'created_at',
+                'task_comments' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'content'
+                    ]
+                ]
+            ],
+        ],
+        'current_page',
+        'path',
+        'first_page_url',
+        'from',
+        'next_page_url',
+        'per_page',
+        'prev_page_url',
+    ]);
+});
+
+
+/**
+ * Check if a owner of a building can get all tasks
+ */
+test('Test if a building owner can get tasks from an own building', function () {
     $response = $this->loginAsOwner()->get(
         strtr(ApiUrls::GET_BUILDING_TASKS, [':id' => Fakes::FAKE_BUILDING_ID]),
     );
@@ -47,6 +124,9 @@ test('Test if a building owner can herhehrehreget tasks from an own building', f
     ]);
 });
 
+/**
+ * Check if a user that is a team member can get the tasks of a building
+ */
 test('Test if a staff can get tasks from a building that is working for', function () {
     $response = $this->loginAsStaff()->get(
         strtr(ApiUrls::GET_BUILDING_TASKS, [':id' => Fakes::FAKE_BUILDING_ID]),
@@ -55,6 +135,9 @@ test('Test if a staff can get tasks from a building that is working for', functi
     $response->assertOk();
 });
 
+/**
+ * Check if a user that is not a team member can't get the tasks of a building
+ */
 test('Test if a user can\'t get tasks from a building that is not working for', function () {
     $response = $this->loginAsNonStaff()->get(
         strtr(ApiUrls::GET_BUILDING_TASKS, [':id' => Fakes::FAKE_BUILDING_ID]),
