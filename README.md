@@ -6,7 +6,10 @@
 - [Setting up](#Setting-up)
 - [Technical requirements](#Technical-requirements)
 - [Documentation](#Documentation)
+	- [Endpoints](#Endpoints)
+	- [Telescope](#Telescope)
 	- [Database](#Database)
+        - [Process](#Process)
 
 ## Requirements
 
@@ -18,15 +21,18 @@ For method 1
 - Docker
 - docker-compose
 - make
+- git
 
-For method 2
+For the second way of install you would additionaly need
+
+- composer
+- php
 
 
 ## Setting up
 
 Run the following commands:
 
-1.
 ```
 git clone https://github.com/settle-real-state-mngmt/task-system.git
 cd task-system
@@ -44,7 +50,6 @@ The command make install will:
 5. Generate a jwt secret
 6. Run our migrations and seeders
 
-2.
 A second way of installing the application is by running the following commands:
 
 ```
@@ -66,14 +71,76 @@ composer install
 ./vendor/bin/sail test
 ```
 
-[alltests](alltests.jpg)
+![alltests](alltests.jpg)
 
 
 ## Documentation
 
+
+
+
 ## Endpoints
 
 This api ships with a swagger documentation! you can access it on http://localhost/docs/api endpoing.
+
+### Flow of use of the API
+
+This API has most of its endpoints protected via JWT authentication. The only routes that are **NOT** protected are:
+
+- POST /users
+- POST /login
+
+The first one because it is used to register a user in the application and the second one so we can get authenticated.
+
+After creating a user and login in you have a JWT Token and with that you can access the following routes:
+
+> Don't forget to add the header to your request
+> Authorization Bearer $token
+
+1. POST /logout
+2. POST /teams
+3. POST /teams/{team}/users
+4. GET /buildings/{id}/tasks
+5. POST /buildings
+6. POST /buildings/{building}/tasks
+7. PUT  /buildings/{building}/tasks/{task}
+
+1. Logs out
+2. Creates a team
+
+The user whom creates a team is assigned as its owner and this information is later used to check access control.
+
+> to register a Team you need a body with a key Title.
+
+3. Add a user to a team
+
+Only the Owner of a team can add another user to it.
+
+> to add a user to a team you need a body with a key user_id
+
+
+4. Get all tasks from a given building
+
+In this endpoint you also have the following query params to filter the tasks.
+
+assignee for a specific user (user_id)
+end/start for date range
+status for well.. status (Open, In progress, Completed, Rejected)
+
+Team/Building owners and members can check building tasks.
+Users that are not part of a team can't see tasks for buildings.
+
+5. Creates a building
+
+> to add a building you need a body with a key name
+
+6. Creates a task to a building
+
+Team/Building owners and members can add a task to a building.
+
+7. Updates a task
+
+Team/Building owners and members can add a task to a building.
 
 ## Telescope
 
@@ -88,6 +155,7 @@ pgAdmin 4 was added to the docker image if you would like to check anything with
 > Ah don't forget to use docker's alias in there add a server.
 
 #### Process
+
 Given the project description and the Technical requirements here is the process I've followed in order to build the database.
 
 A client needs to manage multiple buildings.
@@ -116,18 +184,22 @@ A task has one or many comments.
 
 Which ended up being the ER below.
 
-[ER](ER.jpg)
+![ER](ER.jpg)
 
 With that I can achieve every [requirement](#Technical requirements).
 
 ## Technical requirements
 
-- [ ] Develop an application using Laravel with REST architecture.
-- [ ] Implement GET endpoint for listing tasks of a building along with their comments.
-- [ ] Implement POST endpoint for creating a new task.
-- [ ] Implement POST endpoint for creating a new comment for a task.
-- [ ] Define the payload structure for task and comment creation, considering necessary relationships and information for possible filters.
-- [ ] Implement filtering functionality, considering at least three filters such as date range of creation and assigned user, or task status and the building it belongs to.
-- [ ] Containerize the application using Docker. 
-- [ ] Type methods and parameters for improved code clarity. 
-- [ ] Include descriptive PHPDoc in the methods.
+- [x] Develop an application using Laravel with REST architecture.
+- [x] Implement GET endpoint for listing tasks of a building along with their comments.
+- [x] Implement POST endpoint for creating a new task.
+- [x] Implement POST endpoint for creating a new comment for a task.
+- [x] Define the payload structure for task and comment creation, considering necessary relationships and information for possible filters.
+- [x] Implement filtering functionality, considering at least three filters such as date range of creation and assigned user, or task status and the building it belongs to.
+- [x] Containerize the application using Docker. 
+- [x] Type methods and parameters for improved code clarity. 
+- [x] Include descriptive PHPDoc in the methods.
+
+## Could be better?
+
+Improvements are endless, but, things I notice while develop was:
